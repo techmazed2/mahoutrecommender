@@ -1,6 +1,7 @@
 package mahout;
 
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.impl.model.file.FileDataModel;
 import org.apache.mahout.cf.taste.impl.neighborhood.ThresholdUserNeighborhood;
@@ -13,7 +14,10 @@ import org.apache.mahout.cf.taste.recommender.UserBasedRecommender;
 import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 
 import java.io.IOException;
+import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -46,14 +50,35 @@ public class RecommenderDemo {
         /*
         We can easily ask the recommender for recommendations now. If we wanted to get three items recommended for the user with userID 2, we would do it like this
          */
-        List<RecommendedItem>  recommendations = recommender.recommend(2, 3);
-        for (RecommendedItem recommendation : recommendations) {
-            System.out.println(recommendation);
+        for(Map.Entry mp : getMemberMap().entrySet()) {
+            String memName = (String) mp.getValue();
+            System.out.println("Recommendation for : " + memName);
+
+            PrintLine();
+
+            List<RecommendedItem> recommendations = recommender.recommend((Long) mp.getKey(), 3);
+            for (RecommendedItem recommendation : recommendations) {
+                System.out.println(memName + " | " + recommendation);
+            }
         }
-
-
-
     }
+
+    public void PrintLine() {
+        System.out.println(StringUtils.repeat("=", 30));
+    }
+
+
+    private Map<Long, String> getMemberMap(){
+        Map<Long, String> memberMap = new HashMap<Long, String>() ;
+
+        memberMap.put(1l, "Member A");
+        memberMap.put(2l, "Member B");
+        memberMap.put(3l, "Member C");
+        memberMap.put(4l, "Member D");
+
+        return memberMap;
+    }
+
 
 
 

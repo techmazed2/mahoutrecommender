@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="ASYNC" class="org.apache.log4j.AsyncAppender">
+        <appender-ref ref="SystemOut"/>
+    </appender>
+    <appender name="systemOut" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="$LOG--> %m%n"/>
+        </layout>
+    </appender>
+    <appender name="detailedSystemOut" class="org.apache.log4j.ConsoleAppender">
+        <param name="threshold" value="off"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="$LOG--> %d %r %-5p (%t)[%l] : %m%n"/>
+        </layout>
+    </appender>
+    <appender name="debugFile" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="logs/debug.log"/>
+        <param name="append" value="true"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="$LOG--> %d %r %-5p (%t)[%l] : %m%n"/>
+        </layout>
+    </appender>
+    <appender name="errorFile" class="org.apache.log4j.RollingFileAppender">
+        <param name="maxFileSize" value="100MB"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="File" value="logs/error.log"/>
+        <param name="threshold" value="error"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="$LOG--> %d %r %-5p (%t)[%l] : %m%n"/>
+        </layout>
+    </appender>
+    <logger name="debugLogger">
+        <level value="all"/>
+        <appender-ref ref="debugFile"/>
+        <appender-ref ref="systemOut"/>
+    </logger>
+    <logger name="errorLogger">
+        <level value="error"/>
+        <appender-ref ref="errorFile"/>
+    </logger>
+    <logger name="org.apache.commons">
+        <level value="error"/>
+    </logger>
+    <logger name="org.hibernate">
+        <level value="error"/>
+    </logger>
+    <logger name="org.hibernate.SQL">
+        <level value="debug"/>
+    </logger>
+    <logger name="org.hibernate.type">
+        <level value="error"/>
+    </logger>
+    <logger name="org.springframework">
+        <level value="error"/>
+    </logger>
+    <logger name="net.sf">
+        <level value="error"/>
+    </logger>
+    <logger name="com.mchange">
+        <level value="error"/>
+    </logger>
+    <logger name="org.apache.hadoop">
+        <level value="error"/>
+    </logger>
+    <logger name="org.apache.zookeeper">
+        <level value="error"/>
+    </logger>
+    <logger name="com.googlecode.ehcache">
+        <level value="error"/>
+    </logger>
+
+
+    <root>
+        <level value="debug"/>
+        <appender-ref ref="detailedSystemOut"/>
+        <appender-ref ref="systemOut"/>
+        <appender-ref ref="debugFile"/>
+        <appender-ref ref="errorFile"/>
+    </root>
+</log4j:configuration>
