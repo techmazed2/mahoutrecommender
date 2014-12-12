@@ -12,7 +12,6 @@ import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.recommender.UserBasedRecommender;
 import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class RecommenderDemo {
         /**
          * The first thing we have to do is load the data from the file. Mahout's recommenders use an interface called DataModel to handle interaction data. You can load our made up interactions like this
          */
-        DataModel model = new FileDataModel(new File(AppConstants.TEST_FILE));
+        DataModel model = new FileDataModel(Helper.readFile());
         /*
         In this example, we want to create a user-based recommender. The idea behind this approach is that when we want to compute recommendations for a particular users, we look for other users with a
          similar taste and pick the recommendations from their items. For finding similar users, we have to compare their interactions. There are several methods for doing this. One popular method is to

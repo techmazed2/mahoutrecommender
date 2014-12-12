@@ -13,7 +13,6 @@ import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
 import org.apache.mahout.cf.taste.recommender.Recommender;
 import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -33,7 +32,8 @@ public class EvaluateRecommender implements RecommenderBuilder {
      * @throws TasteException
      */
     public void holdOutTest() throws IOException, TasteException {
-        DataModel model = new FileDataModel(new File(AppConstants.TEST_FILE));
+
+        DataModel model = new FileDataModel(Helper.readFile());//new File(AppConstants.TEST_FILE));
         RecommenderEvaluator evaluator = new AverageAbsoluteDifferenceRecommenderEvaluator();
         RecommenderBuilder builder = new EvaluateRecommender();
         double result;

@@ -8,5 +8,5 @@ package mahout;
  * To change this template use File | Settings | File Templates.
  */
 public class AppConstants {
-    public static final String TEST_FILE = "c:/data/dataset.csv";
+    public static final String TEST_FILE = "dataset.csv";
 }
